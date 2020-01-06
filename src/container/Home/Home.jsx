@@ -1,13 +1,20 @@
 import React,{Component} from 'react';
-import YoutubeComponent from '../../component/YoutubeComponent/YoutubeComponent';
+import LifeCycleComponent from '../../component/LifeCycleComponent/LifeCycleComponent';
 
 class Home extends Component{
+    state = {
+        showComponent: true,
+
+    }
+
     render(){
         return(
             <div>
-                <YoutubeComponent title="Test1" desc="Desc1"/>
-                <YoutubeComponent title="Test2" desc="Desc2"/>
-                <YoutubeComponent />
+                <p>LifeCycleComponent</p>
+                <hr></hr>
+            {
+                this.state.showComponent ? <LifeCycleComponent/>:null
+            }
             </div>
         )
     }
