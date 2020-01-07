@@ -11,7 +11,7 @@ class BlogPost extends Component{
     }
 
     componentDidMount(){
-        fetch('https://jsonplaceholder.typicode.com/posts')
+        fetch('http://localhost:3004/posts')
         .then(response => response.json())
         .then(json => {
             this.setState({
