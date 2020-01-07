@@ -10,6 +10,18 @@ class BlogPost extends Component{
 
     }
 
+    handleRemove = (data) =>{
+        console.log(data);
+        fetch('http://localhost:3004/posts/${data}', {
+            method: 'DELETE'
+          }).then(() => {
+             console.log('removed');
+          }).catch(err => {
+            console.error(err)
+          });
+        
+    }
+
     componentDidMount(){
         fetch('http://localhost:3004/posts')
         .then(response => response.json())
@@ -36,14 +48,19 @@ class BlogPost extends Component{
                 <h1>Blog Post</h1>
                 
                 <hr></hr>
+                
                 {
                     this.state.post.map(post=>{
                         return <PostComponent 
                                 key={post.id}
                                 title={post.title} 
-                                desc={post.body}/>
+                                desc={post.body}
+                                remove={this.handleRemove}
+                                data={post}
+                                />
                     })
                 }
+                
             </Fragment>
             
         )

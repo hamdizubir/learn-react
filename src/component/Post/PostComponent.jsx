@@ -7,10 +7,16 @@ const PostComponent = (props) =>{
                 <img src="https://placeimg.com/200/150/tech"></img>
             </div>
             <div>
-                <h3>{props.title}</h3>
+                <h3>{props.data.title}</h3>
             </div>
             <div>
-                <p>{props.desc}</p>
+                <p>{props.data.body}</p>
+            </div>
+            <div>
+                <button onClick={()=> props.remove(props.data.id)}>remove</button>
+            </div>
+            <div>
+            <p>-----------------</p>
             </div>
         </div>
     )
