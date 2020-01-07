@@ -34,6 +34,7 @@ class BlogPost extends Component{
         return(
             <Fragment>
                 <h1>Blog Post</h1>
+                
                 <hr></hr>
                 {
                     this.state.post.map(post=>{
