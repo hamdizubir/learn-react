@@ -11,15 +11,11 @@ class BlogPost extends Component{
     }
 
     handleRemove = (data) =>{
-        console.log(data);
-        fetch('http://localhost:3004/posts/${data}', {
+        fetch(`http://localhost:3004/posts/${data}`, {
             method: 'DELETE'
-          }).then(() => {
-             console.log('removed');
           }).catch(err => {
             console.error(err)
           });
-        
     }
 
     componentDidMount(){
