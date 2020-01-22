@@ -7,19 +7,62 @@ class BlogPost extends Component{
 
     state={
         post:[],
+        formBlogPost: {
+            id: 1,
+            title:'',
+            body:'',
+            userId: 1,
+        }
 
     }
 
     handleRemove = (data) =>{
         fetch(`http://localhost:3004/posts/${data}`, {
             method: 'DELETE'
+          }).then(()=>{
+            this.getPostAPI();
           }).catch(err => {
             console.error(err)
           });
     }
 
+    handleFormChange = (event) => {
+        let formBlogPostNew = {...this.state.formBlogPost};
+        formBlogPostNew[event.target.name] = event.target.value;
+        let timestamp = new Date().getTime();
+        formBlogPostNew['id'] = timestamp;
+        this.setState({
+            formBlogPost : formBlogPostNew
+        },()=>{
+            console.log('object', this.state.formBlogPost);
+        })
+    }
+
+    handleSubmit = () => {
+        this.postDataToAPI();
+    }
+
+    getPostAPI = () => {
+        Axios.get('http://localhost:3004/posts?_sort=id&_order=desc').then((result)=>{
+            this.setState({
+                post: result.data,
+                
+            })
+        })
+    }
+
+    postDataToAPI = () =>{
+        Axios.post('http://localhost:3004/posts', this.state.formBlogPost).then((res)=> {
+            console.log('res', res);
+            this.getPostAPI();
+
+        }, (err) => {
+            console.log('err', err)
+        })
+    }
+
     componentDidMount(){
-        fetch('http://localhost:3004/posts')
+        fetch('http://localhost:3004/posts?_sort=id&_order=desc')
         .then(response => response.json())
         .then(json => {
             this.setState({
@@ -27,6 +70,7 @@ class BlogPost extends Component{
 
             })
         })
+
 
 
             // Axios.get('https://jsonplaceholder.typicode.com/posts')
@@ -41,6 +85,13 @@ class BlogPost extends Component{
     render(){
         return(
             <Fragment>
+                <div className='form-add-post'>
+                    <label htmlFor="title">title</label>
+                    <input type="text" name="title" id="" placeholder="add title" onChange={this.handleFormChange}/>
+                    <label htmlFor="body"></label>
+                    <textarea name="body" id="" cols="30" rows="10" onChange={this.handleFormChange}></textarea>
+                    <button className='simpan' onClick={this.handleSubmit}>Simpan</button>
+                </div>
                 <h1>Blog Post</h1>
                 
                 <hr></hr>
