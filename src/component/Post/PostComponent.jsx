@@ -14,6 +14,7 @@ const PostComponent = (props) =>{
             </div>
             <div>
                 <button onClick={()=> props.remove(props.data.id)}>remove</button>
+                <button onClick={()=> props.update(props.data)}>update</button>
             </div>
             <div>
             <p>-----------------</p>
