@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import PostComponent from "../../component/Post/PostComponent";
+import PostComponent from "../../../component/Post/PostComponent";
 import Axios from "axios";
 
 class BlogPost extends Component {
@@ -66,6 +66,10 @@ class BlogPost extends Component {
       }
     
   };
+
+  handleDetail = (id)  => {
+    this.props.history.push(`/detail-post/${id}`)     
+  }
 
   getPostAPI = () => {
     Axios.get("http://localhost:3004/posts?_sort=id&_order=desc").then(
@@ -168,6 +172,7 @@ class BlogPost extends Component {
               desc={post.body}
               remove={this.handleRemove}
               update={this.handleUpdate}
+              goDetail={this.handleDetail}
               data={post}
             />
           );

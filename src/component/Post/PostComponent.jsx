@@ -7,7 +7,7 @@ const PostComponent = (props) =>{
                 <img src="https://placeimg.com/200/150/tech"></img>
             </div>
             <div>
-                <h3>{props.data.title}</h3>
+                <h3 style={{cursor:'pointer'}} onClick={()=>props.goDetail(props.data.id)}>{props.data.title}</h3>
             </div>
             <div>
                 <p>{props.data.body}</p>
