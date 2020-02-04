@@ -23,7 +23,7 @@ class Home extends Component{
                         <Link to='/youtube'>Youtube</Link>
                     </div>
                     <Route path="/" exact component={BlogPost}></Route>
-                    <Route path='/detail-post/:id' component={DetailPost }></Route>
+                    <Route path='/detail-post/:id' component={DetailPost}></Route>
                     <Route path="/lifecycle" component={LifeCycleComponent}></Route>
                     <Route path="/product" component={Product}></Route>
                     <Route path="/youtube" component={YoutubeComponent}></Route>
