@@ -17,15 +17,14 @@ class Product extends Component{
             <Fragment>
             <div>
                 <h1>Counter</h1>
+                <p>Keranjang</p>
                 <p>{this.state.order}</p>
                 <hr></hr>
             </div>
             <CardProduct onCounterChange={(value)=>this.handleCounterChange(value)}/>
-
             </Fragment>
 
         )
     }
 }
-
 export default Product;
