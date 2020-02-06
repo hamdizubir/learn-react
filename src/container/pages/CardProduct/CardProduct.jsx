@@ -5,7 +5,7 @@ class CardProduct extends Component{
     render(){
         return(
             <div>
-                <Counter onCounterChange={(value) => this.props.onCounterChange(value)}></Counter>
+                <Counter/>
             </div>
         )
     }

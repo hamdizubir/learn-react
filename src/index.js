@@ -8,12 +8,30 @@ import { Provider } from "react-redux";
 
 
 const globalState = {
-  totalOrder: 45
+  totalOrder: 4
 };
 
 //Reducer
 const rootReducer = (state = globalState, action) => {
-  return state;
+  if(action.type === 'PLUS_ORDER'){
+      return{
+          ...state,
+          totalOrder: state.totalOrder+1
+      }
+  }
+  if(action.type === 'MINUS_ORDER'){
+    let totalOrder = 0;
+      
+    if(state.totalOrder>0){
+        totalOrder= state.totalOrder-1
+    }
+    return{
+        ...state,
+        totalOrder: totalOrder
+    }
+}
+
+return state;
 };
 
 //Store

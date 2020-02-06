@@ -1,70 +1,76 @@
-import React,{Component, Fragment} from 'react';
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
 
-class LifeCycleComponent extends Component{
-    constructor(props){
-        super(props);
-        this.state={
-            count:1
-        }
+class LifeCycleComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 1
+    };
 
-        console.log('constructor');
+    console.log("constructor");
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log("getDerivedStateFromProps");
+    return null;
+  }
+
+  componentDidMount() {
+    console.log("componentDidMount");
+    // this.setState({
+    //     count:2,
+
+    // })
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("shouldComponentUpdate");
+    if (nextState.count >= 4) {
+      return false;
     }
+    return true;
+  }
 
-    static getDerivedStateFromProps(props,state){
-        console.log('getDerivedStateFromProps');
-        return null;
-    }
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    console.log("getSnapshotBeforeUpdate");
+    return null;
+  }
 
-    componentDidMount(){
-        console.log('componentDidMount');
-        // this.setState({
-        //     count:2,
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log("componentDidUpdate");
+  }
 
-        // })
-    }
+  componentWillUnmount() {
+    console.log("componentWillUnmount");
+  }
 
-    shouldComponentUpdate(nextProps, nextState){
-        console.log('shouldComponentUpdate');
-        if(nextState.count>=4){
-            return false;
-        }
-        return true;
-    }
+  changeCount = () => {
+    this.setState({
+      count: this.state.count + 1
+    });
+  };
 
-    getSnapshotBeforeUpdate(prevProps, prevState){
-        console.log('getSnapshotBeforeUpdate');
-        return null;
-    }
+  render() {
+    console.log("render");
+    return (
+      <Fragment>
+        <h1>Life Cycle Component</h1>
+        <button onClick={this.changeCount}>
+          Component Button {this.state.count}
+        </button>
+        <hr></hr>
 
-    componentDidUpdate(prevProps,prevState,snapshot){
-        console.log('componentDidUpdate');
-    }
-
-    componentWillUnmount(){
-        console.log('componentWillUnmount');
-    }
-
-    changeCount = () =>{
-        this.setState({
-            count: this.state.count +1,
-        })
-    }
-
-    render(){
-        console.log('render');
-        return(
-            <Fragment>
-
-                <h1>Life Cycle Component</h1>
-                <button onClick={this.changeCount}>Component Button {this.state.count}</button>
-
-            </Fragment>
-
-            
-        )
-    }
-    
-
+        <p>Total: {this.props.order}</p>
+      </Fragment>
+    );
+  }
 }
 
-export default LifeCycleComponent;
+const mapStateToProps = state => {
+  return {
+    order: state.totalOrder
+  };
+};
+
+export default connect(mapStateToProps)(LifeCycleComponent);

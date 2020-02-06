@@ -7,33 +7,33 @@ class Counter extends Component{
     //     order:4
     // }
 
-    handleCounterChange = (newValue)=>{
-        this.props.onCounterChange(newValue)
-    }
+    // handleCounterChange = (newValue)=>{
+    //     this.props.onCounterChange(newValue)
+    // }
 
-    handlePlus = () =>{
-        this.setState({
-            order: this.state.order +1,
-        }, () => {
-            this.handleCounterChange(this.state.order)
-        })
-    }
+    // handlePlus = () =>{
+    //     this.setState({
+    //         order: this.state.order +1,
+    //     }, () => {
+    //         this.handleCounterChange(this.state.order)
+    //     })
+    // }
 
-    handleMinus = () =>{
-        this.setState({
-            order: this.state.order -1,
-        }, () => {
-            this.handleCounterChange(this.state.order)
-        })
-    }
+    // handleMinus = () =>{
+    //     this.setState({
+    //         order: this.state.order -1,
+    //     }, () => {
+    //         this.handleCounterChange(this.state.order)
+    //     })
+    // }
 
     render(){
         console.log(this.props);
         return(
             <div>
-                <button onClick={this.handleMinus}>-</button>
+                <button onClick={this.props.handleMinus}>-</button>
                 <p>{this.props.order}</p>
-                <button onClick={this.handlePlus}>+</button>
+                <button onClick={this.props.handlePlus}>+</button>
             </div>
             
         )
@@ -48,4 +48,11 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Counter);
+const mapDispatchToProps = (dispatch) => {
+    return{
+        handlePlus: ()=>dispatch({type: 'PLUS_ORDER'}),
+        handleMinus: ()=>dispatch({type: 'MINUS_ORDER'}),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
